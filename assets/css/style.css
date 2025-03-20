@@ -1,0 +1,124 @@
+:root {
+    --bg-color: #f1f1f1;
+    --text-color: #000000;
+    --text-color2: #ffffff;
+    --tile-bg: #ffffff;
+    --tile-hover: #e0e0e0;
+    --add-shortcut-bg: #cce5ff;
+    --add-shortcut-text: #007bff;
+    --form-items-bg: #ffffff; /* Add a default background color for form items */
+}
+
+body {
+    min-height: 100vh;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.navbar-brand, .nav-link {
+    color: #004d40;
+    font-size: 1.5rem; /* Increase text size */
+    font-weight: 600;  /* Make text bolder */
+}
+
+.heading {
+    text-align: center;
+    font-size: calc(16px + 4vmin);
+    margin-bottom: 2rem;
+}
+
+.search-bar,
+.bookmark-field {
+    background-color: var(--form-items-bg);
+    border: 0.1rem solid #6e6e6e96; /* Light gray border */
+    border-radius: 8px;
+}
+
+.search-bar:focus,
+.bookmark-field input:focus {
+    outline: none; /* Remove default outline on focus */
+    border-color: #007bff; /* Optional: Custom focus border color */
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Optional: Add a subtle blue shadow */
+}
+
+#footer{
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+}
+
+.bookmark-card {
+    width: 120px;
+    height: 130px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.3s;
+    flex-direction: column;
+}
+
+.bookmark-card:hover {
+    background-color: #efe9e9;
+}
+
+.bookmark-menu {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    display: none;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+    z-index: 10;
+}
+
+.bookmark-card:hover .bookmark-menu {
+    display: block;
+}
+
+.options-menu {
+    position: absolute;
+    top: 30px;
+    right: 5px;
+    background: white;
+    border-radius: 5px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+    padding: 5px 0;
+    display: none;
+    width: 100px;
+    z-index: 100;
+}
+
+.options-menu button {
+    display: block;
+    width: 100%;
+    background: none;
+    border: none;
+    padding: 8px;
+    text-align: left;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.options-menu button:hover {
+    background: #f1f1f1;
+}
+
+.bookmark-link {
+    text-decoration: none;
+    color: black;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.bookmark-title {
+    margin-top: 5px;
+    font-size: 14px;
+}
