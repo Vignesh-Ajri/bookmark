@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Login & Sign Up</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+    <style>
+        body {
+            background-color: #f8f9fa;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        .login-container {
+            background-color: #fff;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            max-width: 900px;
+            width: 100%;
+        }
+
+        .login-image {
+            background: url('./assets/images/login.png') center/contain no-repeat;
+            background-color: #fff;
+            min-height: 500px;
+        }
+
+        .form-control, .input-group-text {
+            height: 45px;
+        }
+
+        .form-control {
+            border: none;
+            border-bottom: 2px solid #ccc;
+            border-radius: 0;
+        }
+
+        .form-control:focus {
+            box-shadow: none;
+            border-color: #0d6efd;
+        }
+
+        .input-group-text {
+            background: transparent;
+            border: none;
+            color: #0d6efd;
+            width: 45px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .toggle-link {
+            color: #0d6efd;
+            cursor: pointer;
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .login-image {
+            display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    
+    <div class="container px-3">
+        <div class="row login-container">
+            <!-- Left: Image -->
+            <div class="col-md-6 login-image"></div>
+
+            <!-- Right: Form Section -->
+            <div class="col-md-6 p-5">
+                <!-- Form Title -->
+                <h3 class="text-center mb-4 fw-bold" id="formTitle">Login</h3>
+
+                <!-- Login Form -->
+                <form id="loginForm" onsubmit="return handleLogin()">
+                    <div class="mb-1 input-group">
+                        <span class="input-group-text"><i class="fa fa-envelope"></i></span>
+                        <input type="email" id="loginEmail" class="form-control" placeholder="Email" required>
+                    </div>
+                    <!-- Error message for email -->
+                    <div class="text-danger mb-2 ms-5" id="loginEmailError"></div>
+
+                    <div class="mb-1 input-group">
+                        <span class="input-group-text"><i class="fa fa-lock"></i></span>
+                        <input type="password" id="loginPassword" class="form-control" placeholder="Password" required>
+                    </div>
+                    <!-- Error message for password -->
+                    <div class="text-danger mb-2 ms-5" id="loginPasswordError"></div>
+
+                    <div class="ms-3 mb-3 form-check">
+                        <input type="checkbox" class="form-check-input" id="remember">
+                        <label class="form-check-label" for="remember">Remember me</label>
+                    </div>
+
+                    <div class="d-grid ms-3 mb-3">
+                        <button type="submit" class="btn btn-primary">Log In</button>
+                    </div>
+                </form>
+
+                <!-- Sign Up Form -->
+                <form id="signupForm" class="d-none" onsubmit="return handleSignup()">
+                    <div class="mb-1 input-group">
+                        <span class="input-group-text"><i class="fa fa-user"></i></span>
+                        <input type="text" id="signupName" class="form-control" placeholder="Your Name" required>
+                    </div>
+                    <!-- Error message for name -->
+                    <div class="text-danger mb-2 ms-2" id="signupNameError"></div>
+
+                    <div class="mb-1 input-group">
+                        <span class="input-group-text"><i class="fa fa-envelope"></i></span>
+                        <input type="email" id="signupEmail" class="form-control" placeholder="Email" required>
+                    </div>
+                    <!-- Error message for email -->
+                    <div class="text-danger mb-2 ms-5" id="signupEmailError"></div>
+
+                    <div class="mb-1 input-group">
+                        <span class="input-group-text"><i class="fa fa-lock"></i></span>
+                        <input type="password" id="signupPassword" class="form-control" placeholder="Password" required>
+                    </div>
+                    <!-- Error message for password -->
+                    <div class="text-danger mb-3 ms-5" id="signupPasswordError"></div>
+
+                    <div class="d-grid ms-3 mb-3">
+                        <button type="submit" class="btn btn-success">Sign Up</button>
+                    </div>
+                </form>
+
+                <!-- Toggle Links -->
+                <p class="text-center ms-3 mt-3">
+                    <span id="toggleText">Don't have an account?</span>
+                    <span class="toggle-link" onclick="toggleForms()">Sign Up</span>
+                </p>
+
+                <div class="text-start ms-3 mt-3">
+                    <a href="/index.html" class="text-decoration-none">
+                      Back to Home
+                    </a>
+                  </div>                  
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        function toggleForms() {
+            const signupForm = document.getElementById('signupForm');
+            const loginForm = document.getElementById('loginForm');
+            const formTitle = document.getElementById('formTitle');
+            const toggleText = document.getElementById('toggleText');
+            const toggleLink = document.querySelector('.toggle-link');
+
+            signupForm.classList.toggle('d-none');
+            loginForm.classList.toggle('d-none');
+
+            const isLogin = !loginForm.classList.contains('d-none');
+            formTitle.textContent = isLogin ? 'Login' : 'Sign Up';
+            toggleText.textContent = isLogin ? "Don't have an account?" : "Already have an account?";
+            toggleLink.textContent = isLogin ? "Sign Up" : "Log In";
+
+            // Clear inputs and errors
+            document.querySelectorAll('input').forEach(input => input.value = '');
+            document.querySelectorAll('.text-danger').forEach(e => e.innerText = '');
+        }
+
+        function handleLogin() {
+            const email = document.getElementById('loginEmail').value.trim();
+            const password = document.getElementById('loginPassword').value.trim();
+            const emailError = document.getElementById('loginEmailError');
+            const passwordError = document.getElementById('loginPasswordError');
+
+            emailError.innerText = '';
+            passwordError.innerText = '';
+
+            const validEmail = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+            if (!validEmail.test(email)) {
+                emailError.innerText = "Enter a valid email.";
+                return false;
+            }
+
+            if (password.length < 6) {
+                passwordError.innerText = "Password must be at least 6 characters.";
+                return false;
+            }
+
+            if (email === "user@gmail.com" && password === "user123") {
+                alert("Login Successful!");
+                window.location.href = "bookmarks.html";
+            } else {
+                passwordError.innerText = "Invalid email or password.";
+            }
+
+            return false;
+        }
+
+        function handleSignup() {
+            const name = document.getElementById('signupName').value.trim();
+            const email = document.getElementById('signupEmail').value.trim();
+            const password = document.getElementById('signupPassword').value.trim();
+            const nameError = document.getElementById('signupNameError');
+            const emailError = document.getElementById('signupEmailError');
+            const passwordError = document.getElementById('signupPasswordError');
+
+            nameError.innerText = '';
+            emailError.innerText = '';
+            passwordError.innerText = '';
+
+            if (name.length === 0) {
+                nameError.innerText = "Name is required.";
+                return false;
+            }
+
+            const validEmail = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+            if (!validEmail.test(email)) {
+                emailError.innerText = "Enter a valid email.";
+                return false;
+            }
+
+            if (password.length < 6) {
+                passwordError.innerText = "Password must be at least 6 characters.";
+                return false;
+            }
+
+            alert("Signup Successful! Please login.");
+            toggleForms();
+            return false;
+        }
+    </script>
+
+    <!-- Bootstrap Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

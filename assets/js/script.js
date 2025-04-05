@@ -107,9 +107,18 @@ function createBookmarkElement(name, url, index) {
 
     // Bookmark favicon
     const img = document.createElement("img");
-    img.src = `${new URL(url).origin}/favicon.ico`;
     img.alt = name;
-    img.onerror = function () { img.src = "default-icon.png"; };
+    try{
+        img.src = `${new URL(url).origin}/favicon.ico`;
+    }
+    catch (error){
+        console.log("Invalid URL:", error.message);
+        img.src = "pic.jpg"; // Default fallback favicon
+    }
+     // Ensure fallback favicon on error
+    img.onerror = function () {
+        this.src = "./assets/images/pic.jpg";
+    };
 
     // Bookmark title
     const titleDiv = document.createElement("div");

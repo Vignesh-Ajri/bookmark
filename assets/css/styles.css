@@ -1,3 +1,4 @@
+
 :root {
     --bg-color: #f1f1f1;
     --text-color: #000000;
@@ -9,17 +10,40 @@
     --form-items-bg: #ffffff; /* Add a default background color for form items */
 }
 
-body {
-    min-height: 100vh;
-    background-color: var(--bg-color);
-    color: var(--text-color);
-    transition: background-color 0.3s ease, color 0.3s ease;
+body, html {
+    margin: 0;
+    height: 100%;
+    scroll-behavior: smooth;
 }
 
-.navbar-brand, .nav-link {
-    color: #004d40;
-    font-size: 1.5rem; /* Increase text size */
-    font-weight: 600;  /* Make text bolder */
+.page-wrapper {
+    min-height: 100%;
+    flex-direction: column;
+    display: flex;
+}
+
+.container {
+    flex: 1;
+  }
+
+nav.navbar {
+    background-color: white;
+    flex: 0 0 10%;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.brand-large {
+    font-weight: bold;
+    font-size: 2rem;
+}
+
+.nav-link-large {
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.navbar-nav.flex-row .nav-item + .nav-item {
+    margin-left: 1.5rem; /* space between links */
 }
 
 .heading {
@@ -40,12 +64,6 @@ body {
     outline: none; /* Remove default outline on focus */
     border-color: #007bff; /* Optional: Custom focus border color */
     box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Optional: Add a subtle blue shadow */
-}
-
-#footer{
-    position: fixed;
-    width: 100%;
-    bottom: 0;
 }
 
 .bookmark-card {
@@ -118,7 +136,34 @@ body {
     align-items: center;
 }
 
+.bookmark-link img {
+    border-radius: 50%;
+    width: 2rem;
+}
+
+.bookmark-link span{
+    color: #f59e9e;
+    font-size: 2rem;
+    font-weight: bold;
+    text-align: center;
+    overflow: hidden;
+}
+
 .bookmark-title {
     margin-top: 5px;
     font-size: 14px;
+}
+
+.bookmark-fallback {
+    width: 32px;
+    height: 32px;
+    background-color: #4CAF50; /* Green background */
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    text-transform: uppercase;
 }
