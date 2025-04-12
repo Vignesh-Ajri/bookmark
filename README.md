@@ -53,7 +53,7 @@ Bookmark/
 
 ## 🙋‍♂️ Author
 
-Made by [Vignesh](https://github.com/ssvignesh2003)
+Made by [Vignesh](https://github.com/Vignesh-Ajri)
 
 ---
 
